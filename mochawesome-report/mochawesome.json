@@ -1,0 +1,100 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2023-06-30T16:59:58.688Z",
+    "end": "2023-06-30T17:00:06.846Z",
+    "duration": 8158,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "0f524901-a22a-47de-ac76-cabb55bc3e28",
+      "title": "",
+      "fullFile": "cypress\\e2e\\login.cy.js",
+      "file": "cypress\\e2e\\login.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ecde0deb-a5c4-482d-b331-a284b00f4b91",
+          "title": "Azure Bookcart application",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Login Should be Success",
+              "fullTitle": "Azure Bookcart application Login Should be Success",
+              "timedOut": null,
+              "duration": 6200,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": "{\n  \"title\": \"cypress-mochawesome-reporter-videos-passed\",\n  \"value\": \"cypress\\\\e2e\\\\login.cy.js\"\n}",
+              "code": "cy.fixture(\"example\").then(data => {\n  cy.visit(data.baseUrl);\n  const login = new _LoginPage.default(); //create object for login\n  const homepage = new _HomePage.default(); //create object for homepage\n  homepage.clickLoginButton(); // Click on Login Link\n  login.setUserName(data.username); //Enter incorrect Credentials\n  login.setPassword(data.password);\n  login.clickSubmit(); //Click on Submit Button\n  homepage.accountCircleIsPresent().should('have.text', 'account_circle'); //Assertion, if it contains this text or not?\n});",
+              "err": {},
+              "uuid": "c696ba51-a573-4390-87e6-f607f95d5ae3",
+              "parentUUID": "ecde0deb-a5c4-482d-b331-a284b00f4b91",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c696ba51-a573-4390-87e6-f607f95d5ae3"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6200,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}
