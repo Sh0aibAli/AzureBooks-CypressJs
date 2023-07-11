@@ -9,16 +9,16 @@ describe('Azure Bookcart application Login', () => {
     cy.fixture("example").then((data) => {
       cy.visit(data.baseUrl);
       
-      const login = new Login();                                  //create object for login
-      const homepage = new HomePage();                            //create object for homepage
+      const login = new Login();                                        //create object for login
+      const homepage = new HomePage();                                  //create object for homepage
       
-      homepage.clickLoginButton();                                // Click on Login Link
+      homepage.clickLoginButton();                                      // Click on Login Link
       
-      login.setUserName("asch");                                  //Enter incorrect Credentials
-      login.setPassword("123456BIJ");
-      login.clickSubmit();                                        //Click on Submit Button
+      login.setUserName(data.incorrectUsername);                        //Enter incorrect Credentials
+      login.setPassword(data.incorrectPassword);
+      login.clickSubmit();                                              //Click on Submit Button
 
-      login.verifyAlertMessage().should('have.text','Username or Password is incorrect.');  //Assertion, if it contains this text or not?
+      login.verifyAlertMessage().should('have.text',data.invalidCreds);  //Assertion, if it contains this text or not?
     })
   })
 
@@ -32,11 +32,11 @@ describe('Azure Bookcart application Login', () => {
       
       homepage.clickLoginButton();                                // Click on Login Link
       
-      login.setUserName(data.username);                                  //Enter incorrect Credentials
+      login.setUserName(data.username);                           //Enter incorrect Credentials
       login.setPassword(data.password);
       login.clickSubmit();                                        //Click on Submit Button
 
-      homepage.accountCircle().should('have.text','account_circle');  //Assertion, if it contains this text or not?
+      homepage.accountCircle().should('have.text',data.accCircle + data.username + data.arrowDd);  //Assertion, if it contains this text or not?
     })
   })
 });

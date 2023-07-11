@@ -2,7 +2,7 @@ class HomePage {
     _lnkLogin = "//span[contains(text(),'Login')]";
     _searchBar = "//input[@placeholder='Search books or authors']";
     _bookItem = "//span[contains(text(),'Roomies')]";
-    _accountCircle = "//span/*[contains(text(),'account_circle')]";
+    _username = ".mat-menu-trigger.mat-button > .mat-button-wrapper";
     _bookItem1 = "//span[@class='mat-option-text']";
     _bookname = "//div/a/strong";
     _addToCart = "//span[contains(text(),'Add to Cart')]";
@@ -23,9 +23,9 @@ class HomePage {
     }
     
     accountCircle() {
-        return cy.xpath(this._accountCircle);
+        return cy.get(this._username);
     }
-
+    
     searchAndSelectBook(book1) {
         cy.xpath(this._searchBar).type(book1);
         cy.xpath(this._bookItem1).click();

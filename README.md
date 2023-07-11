@@ -24,10 +24,13 @@
 `npx cypress run --headed --spec cypress\e2e\login.cy.js --browser chrome`
 
 # For opening cypress window
-`npx cypress run`
+`npx cypress open`
 
 # For Report generating
 # Install the mochaawesome Report
 `npm i --save-dev cypress-mochawesome-reporter`
+
+# Command for adding xpaths dependency to the framework
+`npm install -D cypress-xpath`
 
 
