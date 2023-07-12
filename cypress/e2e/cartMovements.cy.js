@@ -18,8 +18,7 @@ describe('Azure Book Cart movements', () => {
           login.setPassword(data.password);
           login.clickSubmit();                                        //Click on Submit Button
     
-          let accountCircleText = data.accCircle + data.username + data.arrowDd;    //Getting the account circle text
-          homepage.accountCircle().should('have.text',accountCircleText);  //Assertion, if it contains this text or not?
+          homepage.accountCircle().should('have.text',data.accountCircleText);  //Assertion, if it contains this text or not?
           homepage.searchAndSelectBook(data.book1);
           
           homepage.bookname().should('have.text',data.book1);
@@ -55,8 +54,7 @@ describe('Azure Book Cart movements', () => {
           login.setPassword(data.password);
           login.clickSubmit();                                        //Click on Submit Button
     
-          let accountCircleText = data.accCircle + data.username + data.arrowDd;    //Getting the account circle text
-          homepage.accountCircle().should('have.text',accountCircleText);  //Assertion, if it contains this text or not?
+          homepage.accountCircle().should('have.text',data.accountCircleText);  //Assertion, if it contains this text or not?
           homepage.searchAndSelectBook(data.book2);
           
           homepage.bookname().should('have.text',data.book2);

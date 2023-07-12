@@ -1,16 +1,24 @@
 {
+  "baseUrl": "https://bookcart.azurewebsites.net/",
+  
   "incorrectUsername": "QWERTYUI",
   "incorrectPassword": "LKJHGFD654",
   "username": "ortoni11",
   "password": "Pass1234",
-  "baseUrl": "https://bookcart.azurewebsites.net/",
+  
+  
   "book1": "Roomies",
   "book2": "Slayer",
+  
   "firstName": "QT",
   "lastName": "Test",
+  
   "invalidCreds": "Username or Password is incorrect.",
+
   "accCircle": "account_circle ",
   "arrowDd": " arrow_drop_down",
+  "accountCircleText" : "account_circle ortoni11 arrow_drop_down",
+  
   "emptyCart": " Shopping cart is empty ",
   "emptyWishlist": " Your wishlist is empty "
 }

@@ -36,7 +36,7 @@ describe('Azure Bookcart application Login', () => {
       login.setPassword(data.password);
       login.clickSubmit();                                        //Click on Submit Button
 
-      homepage.accountCircle().should('have.text',data.accCircle + data.username + data.arrowDd);  //Assertion, if it contains this text or not?
+      homepage.accountCircle().should('have.text',data.accountCircleText);  //Assertion, if it contains this text or not?
     })
   })
 });
