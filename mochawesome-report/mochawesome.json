@@ -1,15 +1,15 @@
 {
   "stats": {
     "suites": 1,
-    "tests": 1,
+    "tests": 2,
     "passes": 1,
     "pending": 0,
-    "failures": 0,
-    "start": "2023-07-08T13:47:53.610Z",
-    "end": "2023-07-08T13:48:03.580Z",
-    "duration": 9970,
-    "testsRegistered": 1,
-    "passPercent": 100,
+    "failures": 1,
+    "start": "2023-07-13T17:25:01.882Z",
+    "end": "2023-07-13T17:25:15.642Z",
+    "duration": 13760,
+    "testsRegistered": 2,
+    "passPercent": 50,
     "pendingPercent": 0,
     "other": 0,
     "hasOther": false,
@@ -18,49 +18,73 @@
   },
   "results": [
     {
-      "uuid": "4dce5599-ca45-4299-9228-787ab55a4390",
+      "uuid": "9921e4fe-a523-477b-85db-41180af54d3b",
       "title": "",
-      "fullFile": "cypress\\e2e\\Registration.cy.js",
-      "file": "cypress\\e2e\\Registration.cy.js",
+      "fullFile": "cypress\\e2e\\login.cy.js",
+      "file": "cypress\\e2e\\login.cy.js",
       "beforeHooks": [],
       "afterHooks": [],
       "tests": [],
       "suites": [
         {
-          "uuid": "29ea1264-cfdb-425a-be13-c1b42989c6c8",
-          "title": "Azure Bookcart Registration",
+          "uuid": "7e3c7e35-3336-4496-b3d4-dad43d843503",
+          "title": "Azure Bookcart application Login",
           "fullFile": "",
           "file": "",
           "beforeHooks": [],
           "afterHooks": [],
           "tests": [
             {
-              "title": "Register a new User",
-              "fullTitle": "Azure Bookcart Registration Register a new User",
+              "title": "Login Should not be Success",
+              "fullTitle": "Azure Bookcart application Login Login Should not be Success",
               "timedOut": null,
-              "duration": 6980,
+              "duration": 7266,
               "state": "passed",
               "speed": "medium",
               "pass": true,
               "fail": false,
               "pending": false,
-              "context": "{\n  \"title\": \"cypress-mochawesome-reporter-videos-passed\",\n  \"value\": \"cypress\\\\e2e\\\\Registration.cy.js\"\n}",
-              "code": "cy.fixture(\"example\").then(data => {\n  cy.visit(data.baseUrl);\n  const login = new _LoginPage.default(); //create object for login\n  const homepage = new _HomePage.default(); //create object for homepage\n  const registration = new _UserRegistrationPage.default();\n  const timestamp = new Date();\n  homepage.clickLoginButton(); // Click on Login Link\n  login.clickOnRegister();\n  registration.verifyUserRegistration().should('have.text', 'User Registration'); //Assertion, if it contains this text or not?\n  registration.enterFirstName(data.firstName);\n  registration.enterLastName(data.lastName);\n  registration.enterUserName(\"Qualtitech\" + timestamp.getMilliseconds() + timestamp.getMinutes());\n  registration.enterPassword(data.password);\n  registration.enterConfirmPassword(data.password);\n  registration.selectMaleRadioBtn();\n  registration.selectFemaleRadioBtn();\n  registration.selectMaleRadioBtn();\n  registration.clickOnRegister();\n  login.verifyLogin().should('have.text', 'Login');\n});",
+              "context": "{\n  \"title\": \"cypress-mochawesome-reporter-videos-passed\",\n  \"value\": \"cypress\\\\e2e\\\\login.cy.js\"\n}",
+              "code": "cy.fixture(\"example\").then(data => {\n  cy.visit(data.baseUrl);\n  const pomManager = new _POMManager.default(); //create object for pomManager\n  pomManager.homePage.clickLoginButton(); // Click on Login Link\n  pomManager.loginPage.setUserName(data.incorrectUsername); //Enter incorrect Credentials\n  pomManager.loginPage.setPassword(data.incorrectPassword);\n  pomManager.loginPage.clickSubmit(); //Click on Submit Button\n  pomManager.loginPage.verifyAlertMessage().should('have.text', data.invalidCreds); //Assertion, if it contains this text or not?\n});",
               "err": {},
-              "uuid": "8d93daf0-10a9-4dd8-87ea-9e0bf13e70ee",
-              "parentUUID": "29ea1264-cfdb-425a-be13-c1b42989c6c8",
+              "uuid": "ab1b28df-784a-417e-97c8-7a9aee9e3516",
+              "parentUUID": "7e3c7e35-3336-4496-b3d4-dad43d843503",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Login Should be Success",
+              "fullTitle": "Azure Bookcart application Login Login Should be Success",
+              "timedOut": null,
+              "duration": 765,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "[\n  {\n    \"title\": \"cypress-mochawesome-reporter-videos-failed\",\n    \"value\": \"cypress\\\\e2e\\\\login.cy.js\"\n  },\n  {\n    \"title\": \"cypress-mochawesome-reporter-screenshots\",\n    \"value\": [\n      [\n        \"\\\\login.cy.js\\\\Azure Bookcart application Login -- Login Should be Success (failed).png\"\n      ]\n    ]\n  }\n]",
+              "code": "cy.fixture(\"example\").then(data => {\n  cy.visit(data.baseUrl);\n  const pomManager = new _POMManager.default(); //create object for pomManager\n  pomManager.homepage.clickLoginButton(); // Click on Login Link\n  pomManager.loginPage.setUserName(data.username); //Enter incorrect Credentials\n  pomManager.loginPage.setPassword(data.password);\n  pomManager.loginPage.clickSubmit(); //Click on Submit Button\n  pomManager.homepage.accountCircle().should('have.text', data.accountCircleText); //Assertion, if it contains this text or not?\n});",
+              "err": {
+                "message": "TypeError: Cannot read properties of undefined (reading 'clickLoginButton')",
+                "estack": "TypeError: Cannot read properties of undefined (reading 'clickLoginButton')\n    at Context.eval (webpack:///./cypress/e2e/login.cy.js:33:26)",
+                "diff": null
+              },
+              "uuid": "72734096-769d-472d-99f6-c4aa81f687a7",
+              "parentUUID": "7e3c7e35-3336-4496-b3d4-dad43d843503",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "8d93daf0-10a9-4dd8-87ea-9e0bf13e70ee"
+            "ab1b28df-784a-417e-97c8-7a9aee9e3516"
           ],
-          "failures": [],
+          "failures": [
+            "72734096-769d-472d-99f6-c4aa81f687a7"
+          ],
           "pending": [],
           "skipped": [],
-          "duration": 6980,
+          "duration": 8031,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000

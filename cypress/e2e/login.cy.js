@@ -1,5 +1,4 @@
-import Login from "../pageObject/LoginPage"
-import HomePage from "../pageObject/HomePage"
+import POMManager from "../pageObject/POMManager";
 
 
 describe('Azure Bookcart application Login', () => {
@@ -9,16 +8,16 @@ describe('Azure Bookcart application Login', () => {
     cy.fixture("example").then((data) => {
       cy.visit(data.baseUrl);
       
-      const login = new Login();                                        //create object for login
-      const homepage = new HomePage();                                  //create object for homepage
-      
-      homepage.clickLoginButton();                                      // Click on Login Link
-      
-      login.setUserName(data.incorrectUsername);                        //Enter incorrect Credentials
-      login.setPassword(data.incorrectPassword);
-      login.clickSubmit();                                              //Click on Submit Button
+      const pomManager = new POMManager();                                  //create object for pomManager
 
-      login.verifyAlertMessage().should('have.text',data.invalidCreds);  //Assertion, if it contains this text or not?
+      pomManager.homePage.clickLoginButton();                               // Click on Login Link
+      
+      pomManager.loginPage.setUserName(data.incorrectUsername);                        //Enter incorrect Credentials
+      pomManager.loginPage.setPassword(data.incorrectPassword);
+      pomManager.loginPage.clickSubmit();                                              //Click on Submit Button
+
+      pomManager.loginPage.verifyAlertMessage().should('have.text',data.invalidCreds);  //Assertion, if it contains this text or not?
+
     })
   })
 
@@ -27,16 +26,15 @@ describe('Azure Bookcart application Login', () => {
     cy.fixture("example").then((data) => {
       cy.visit(data.baseUrl);
       
-      const login = new Login();                                  //create object for login
-      const homepage = new HomePage();                            //create object for homepage
+      const pomManager = new POMManager();                                  //create object for pomManager
       
-      homepage.clickLoginButton();                                // Click on Login Link
+      pomManager.homePage.clickLoginButton();                               // Click on Login Link
       
-      login.setUserName(data.username);                           //Enter incorrect Credentials
-      login.setPassword(data.password);
-      login.clickSubmit();                                        //Click on Submit Button
+      pomManager.loginPage.setUserName(data.username);                           //Enter incorrect Credentials
+      pomManager.loginPage.setPassword(data.password);
+      pomManager.loginPage.clickSubmit();                                        //Click on Submit Button
 
-      homepage.accountCircle().should('have.text',data.accountCircleText);  //Assertion, if it contains this text or not?
+      pomManager.homePage.accountCircle().should('have.text',data.accountCircleText);  //Assertion, if it contains this text or not?
     })
   })
 });
