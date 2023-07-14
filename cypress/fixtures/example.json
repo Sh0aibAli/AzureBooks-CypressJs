@@ -13,7 +13,7 @@
   "firstName": "QT",
   "lastName": "Test",
   
-  "invalidCreds": "Username or Password is incorrect.",
+  "invalidCredsErrorMessage": "Username or Password is incorrect.",
 
   "accCircle": "account_circle ",
   "arrowDd": " arrow_drop_down",

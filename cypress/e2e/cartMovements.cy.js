@@ -1,76 +1,73 @@
 import POMManager from "../pageObject/POMManager";
 
+const pomManager = new POMManager();                                                        //create object for pomManager
+
 describe('Azure Book Cart movements', () => {
     it('Add and Delete books to cart', () => {
 
         cy.fixture("example").then((data) => {
-          cy.visit(data.baseUrl);
+          cy.visit(data.baseUrl);                                                           //User visit to the application url
           
-          // const login = new Login();                                  //create object for login
-          // const homepage = new HomePage();                            //create object for homepage
-          // const cartItemPage = new CartItemPage();
-          const pomManager = new POMManager();                                  //create object for pomManager
-
-          pomManager.homePage.clickLoginButton();                                // Click on Login Link
+          pomManager.homePage.clickLoginButton();                                           // Click on Login Link
           
-          pomManager.loginPage.setUserName(data.username);                                  //Enter incorrect Credentials
-          pomManager.loginPage.setPassword(data.password);
-          pomManager.loginPage.clickSubmit();                                        //Click on Submit Button
-    
-          pomManager.homePage.accountCircle().should('have.text',data.accountCircleText);  //Assertion, if it contains this text or not?
-          pomManager.homePage.searchAndSelectBook(data.book1);
+          pomManager.loginPage.userLoginWithCredentials(data.username, data.password);      //User tries to log in with correct credentials
+          pomManager.homePage.accountCircle().should('have.text',data.accountCircleText);   //Assertion, if it contains Account Circle text
+        
+          pomManager.homePage.searchAndSelectBook(data.book1);                              //User enters and select a book
           
-          pomManager.homePage.bookname().should('have.text',data.book1);
-          pomManager.homePage.cartCount().should('have.text','0');
-          pomManager.homePage.addToCart();
-          pomManager.homePage.cartCount().should('have.text','1');
-          pomManager.homePage.clickOnCartIcon();
+          pomManager.homePage.bookname().should('have.text',data.book1);                    //Assertion, if it contains Bookname
+          pomManager.homePage.cartCount().should('have.text','0');                          //Assertion, if cart count is zero
+          
+          pomManager.homePage.addToCart();                                                  //User clicks on Add to cart button
+          pomManager.homePage.cartCount().should('have.text','1');                          //Assertion, if cart count is one
+          
+          pomManager.homePage.clickOnCartIcon();                                            //User click on cart icon button
+          pomManager.cartItemPage.cartItemsHeader().should('have.text','Cart Items');       //Assertion, if the page header is Cart Items or not
+          pomManager.cartItemPage.titleOfBookInCart().should('have.text',data.book1);       //Assertion, if the book title is correct
+          
+          pomManager.cartItemPage.deleteItem();                                             //User clicks on Delete button
 
-          pomManager.cartItemPage.cartItemsHeader().should('have.text','Cart Items');
-          pomManager.cartItemPage.titleOfBookInCart().should('have.text',data.book1);
-          pomManager.cartItemPage.deleteItem();
-
-          pomManager.cartItemPage.cartCount().should('have.text','0');
-          pomManager.cartItemPage.cardTitle().should('have.text',data.emptyCart);
-          pomManager.cartItemPage.clickOnContinueShopping();
-
-          pomManager.homePage.clickOnLogout();
-          pomManager.loginPage.verifyLogin().should('have.text','Login');
+          pomManager.cartItemPage.cartCount().should('have.text','0');                      //Assertion, if cart count is zero
+          pomManager.cartItemPage.cardTitle().should('have.text',data.emptyCart);           //Assertion, if card title should contains the empty message
+          
+          pomManager.cartItemPage.clickOnContinueShopping();                                //User clicks on continue shopping button
+          
+          pomManager.homePage.clickOnLogout();                                              //User clicks on logout button
+          pomManager.loginPage.verifyLogin().should('have.text','Login');                   //Assertion, if user is able to see Login Header
         })
       })
 
       it('Add and Delete books to wishlist', () => {
 
         cy.fixture("example").then((data) => {
-          cy.visit(data.baseUrl);
+          cy.visit(data.baseUrl);                                                           //User visit to the application url
           
-          const pomManager = new POMManager();                                  //create object for pomManager
-
-          pomManager.homePage.clickLoginButton();                                // Click on Login Link
+          pomManager.homePage.clickLoginButton();                                           // Click on Login Link
           
-          pomManager.loginPage.setUserName(data.username);                           //Enter correct Credentials
-          pomManager.loginPage.setPassword(data.password);
-          pomManager.loginPage.clickSubmit();                                        //Click on Submit Button
-    
-          pomManager.homePage.accountCircle().should('have.text',data.accountCircleText);  //Assertion, if it contains this text or not?
-          pomManager.homePage.searchAndSelectBook(data.book2);
+          pomManager.loginPage.userLoginWithCredentials(data.username, data.password);      //User tries to log in with correct credentials
+          pomManager.homePage.accountCircle().should('have.text',data.accountCircleText);   //Assertion, if it contains Account Circle text
           
-          pomManager.homePage.bookname().should('have.text',data.book2);
-          pomManager.homePage.wishlistCount().should('have.text','0');
-          pomManager.homePage.addToWishlist();
-          pomManager.homePage.wishlistCount().should('have.text','1');
-          pomManager.homePage.clickOnWishlistIcon();
+          pomManager.homePage.searchAndSelectBook(data.book2);                              //User enters and select a book
+          
+          pomManager.homePage.bookname().should('have.text',data.book2);                    //Assertion, if it contains Bookname
+          pomManager.homePage.wishlistCount().should('have.text','0');                      //Assertion, if cart count is zero
+          
+          pomManager.homePage.addToWishlist();                                              //User clicks on Add to wishlist button
+          pomManager.homePage.wishlistCount().should('have.text','1');                      //Assertion, if cart count is one
+          
+          pomManager.homePage.clickOnWishlistIcon();                                        //User click on wishlist icon button
+          pomManager.wishlistItemPage.wishlistHeader().should('have.text','My wishlist');    //Assertion, if the page header is My wishlist or not
+          pomManager.wishlistItemPage.titleOfBookInWishlist().should('have.text',data.book2);//Assertion, if the book title is correct
+          
+          pomManager.wishlistItemPage.removeFromWishlist();                                  //User clicks on remove button
 
-          pomManager.wishlistItemPage.wishlistHeader().should('have.text','My wishlist');
-          pomManager.wishlistItemPage.titleOfBookInWishlist().should('have.text',data.book2);
-          pomManager.wishlistItemPage.removeFromWishlist();
+          pomManager.homePage.wishlistCount().should('have.text','0');                       //Assertion, if cart count is zero
+          pomManager.wishlistItemPage.cardTitle().should('have.text',data.emptyWishlist);    //Assertion, if card title should contains the empty message
+          
+          pomManager.wishlistItemPage.clickOnContinueShopping();                             //User clicks on continue shopping button
 
-          pomManager.homePage.wishlistCount().should('have.text','0');
-          pomManager.wishlistItemPage.cardTitle().should('have.text',data.emptyWishlist);
-          pomManager.wishlistItemPage.clickOnContinueShopping();
-
-          pomManager.homePage.clickOnLogout();
-          pomManager.loginPage.verifyLogin().should('have.text','Login');
+          pomManager.homePage.clickOnLogout();                                               //User clicks on logout button
+          pomManager.loginPage.verifyLogin().should('have.text','Login');                    //Assertion, if user is able to see Login Header
         })
       })
 });

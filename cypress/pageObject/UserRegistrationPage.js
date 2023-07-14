@@ -14,11 +14,8 @@ class Registration{
         return cy.xpath(this._userRegistrationHeader);
     }
 
-    enterFirstName(firstName){
+    enterFirstnameAndLastname(firstName, lastName){
         cy.xpath(this._firstName).type(firstName);
-    }
-
-    enterLastName(lastName){
         cy.xpath(this._lastName).type(lastName);
     }
 
@@ -26,11 +23,8 @@ class Registration{
         cy.xpath(this._userName).type(userName);
     }
 
-    enterPassword(password){
+    enterPasswordAndConfirmPassword(password){
         cy.xpath(this._password).type(password);
-    }
-
-    enterConfirmPassword(password){
         cy.xpath(this._confirmPassword).type(password);
     }
 
